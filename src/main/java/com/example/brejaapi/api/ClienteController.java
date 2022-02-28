@@ -30,6 +30,7 @@ class ClienteController {
 
     @GetMapping("/clientes")
     Collection<Cliente> clientes() {
+        log.info("Request to find all clientes");
         return clienteService.findAll();
     }
 
