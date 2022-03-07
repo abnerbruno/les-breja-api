@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CervejaRepository extends CrudRepository<Cerveja, Long> {
-    void findCervejasByCategoriaId(Long categoriaId);
 }

@@ -29,6 +29,7 @@ class CervejaController {
 
     @GetMapping("/cervejas")
     Collection<Cerveja> cervejas() {
+        log.info("Request to find all Cervejas");
         return cervejaService.findAll();
     }
 
@@ -48,7 +49,7 @@ class CervejaController {
                 .body(result);
     }
 
-    @PutMapping("/cerveja")
+    @PutMapping("/cerveja/{id}")
     ResponseEntity<Cerveja> updateCerveja(@Validated @RequestBody Cerveja cerveja) {
         log.info("Request to update cerveja: {}", cerveja);
         Cerveja result = cervejaService.update(cerveja);

@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Cervejas")
+@Table(name = "Cerveja")
 public class Cerveja {
 
     @Id
@@ -29,8 +29,8 @@ public class Cerveja {
     private String descricao;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "cerveja_categoria",
+    @JoinTable(name = "cerveja_has_categorias",
             joinColumns = { @JoinColumn(name = "cerveja_id") },
             inverseJoinColumns = { @JoinColumn(name = "categoria_id") })
-    private List<Categoria> categoria;
+    private List<Categoria> categorias;
 }
