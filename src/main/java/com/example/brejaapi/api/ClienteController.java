@@ -50,7 +50,7 @@ class ClienteController {
                 .body(result);
     }
 
-    @PutMapping("/cliente")
+    @PutMapping("/cliente/{id}")
     ResponseEntity<Cliente> updateCliente(@PathVariable Long id, @Validated @RequestBody Cliente cliente) {
         log.info("Request to update cliente: {}", cliente);
         Cliente clienteAtual = clienteService.findById(id).orElseThrow(RuntimeException::new);
