@@ -22,7 +22,6 @@ public class Cerveja {
     private String nome;
     private BigDecimal valorDeVenda;
     private BigDecimal margemDeLucro;
-    private int quantidade;
     private String status;
     private String nomeFornecedor;
     private LocalDate dataCadastro = LocalDate.now();

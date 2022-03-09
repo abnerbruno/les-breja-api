@@ -49,7 +49,7 @@ class PedidoController {
                 .body(result);
     }
 
-    @PutMapping("/pedido")
+    @PutMapping("/pedido/{id}")
     ResponseEntity<Pedido> updatePedido(@Validated @RequestBody Pedido pedido) {
         log.info("Request to update Pedido: {}", pedido);
         Pedido result = pedidoService.update(pedido);

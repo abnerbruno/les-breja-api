@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -25,20 +26,19 @@ public class Pedido {
     private BigDecimal valorTotal;
     private BigDecimal frete;
     private String status;
+    private LocalDate dataCadastro = LocalDate.now();
 
-    @ManyToOne
-    @JoinTable(name = "pedido_cliente",
-            joinColumns = { @JoinColumn(name = "pedido_id") },
-            inverseJoinColumns = { @JoinColumn(name = "cliente_id") })
-    private Cliente cliente;
+    private Long clienteId;
+    private String nomeCliente;
+    private String emailCliente;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Endereco enderecoEnvio;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Cartao cartaoUtilizado;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "pedido_cerveja",
             joinColumns = { @JoinColumn(name = "pedido_id") },
             inverseJoinColumns = { @JoinColumn(name = "cerveja_id") })
