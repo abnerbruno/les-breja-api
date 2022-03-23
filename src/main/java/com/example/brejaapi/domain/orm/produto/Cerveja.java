@@ -19,16 +19,17 @@ public class Cerveja {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
+    private int quantidade;
     private BigDecimal valorDeVenda;
     private BigDecimal margemDeLucro;
+    private String nome;
     private String status;
     private String nomeFornecedor;
-    private LocalDate dataCadastro = LocalDate.now();
     private String descricao;
+    private LocalDate dataCadastro = LocalDate.now();
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "cerveja_has_categorias",
+    @JoinTable(name = "cerveja_categorias",
             joinColumns = { @JoinColumn(name = "cerveja_id") },
             inverseJoinColumns = { @JoinColumn(name = "categoria_id") })
     private List<Categoria> categorias;

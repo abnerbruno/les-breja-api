@@ -22,7 +22,8 @@ public class Envio {
     private String status;
     private LocalDate dataCriacao = LocalDate.now();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
 }

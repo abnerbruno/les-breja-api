@@ -14,8 +14,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Pedido")
 public class Pedido {
@@ -28,19 +28,23 @@ public class Pedido {
     private String status;
     private LocalDate dataCadastro = LocalDate.now();
 
-    private Long clienteId;
-    private String nomeCliente;
-    private String emailCliente;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
+    private Cliente cliente;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Endereco enderecoEnvio;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Cartao cartaoUtilizado;
-
-    @OneToMany(cascade = CascadeType.MERGE)
+    @ManyToMany
     @JoinTable(name = "pedido_cerveja",
             joinColumns = { @JoinColumn(name = "pedido_id") },
             inverseJoinColumns = { @JoinColumn(name = "cerveja_id") })
     private List<Cerveja> cervejas;
+
+    @ManyToOne
+    @JoinColumn(name = "endereco_id")
+    private Endereco enderecoEnvio;
+
+    @ManyToOne
+    @JoinColumn(name = "cartao_id")
+    private Cartao cartaoUtilizado;
+
+
 }

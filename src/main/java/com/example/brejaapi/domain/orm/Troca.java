@@ -1,7 +1,5 @@
 package com.example.brejaapi.domain.orm;
 
-import com.example.brejaapi.domain.orm.cliente.Cliente;
-import com.example.brejaapi.domain.orm.produto.Cerveja;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,13 +20,8 @@ public class Troca {
     private String status;
     private LocalDate dataSolicitacao = LocalDate.now();
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
     private Pedido pedido;
-
-    @OneToOne
-    private Cerveja cerveja;
-
-    @OneToOne
-    private Cliente cliente;
 
 }
