@@ -1,6 +1,6 @@
 package com.example.brejaapi.service.pedidoService;
 
-import com.example.brejaapi.domain.orm.Pedido;
+import com.example.brejaapi.domain.orm.pedido.Pedido;
 import com.example.brejaapi.domain.orm.cliente.Cliente;
 import com.example.brejaapi.domain.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +22,7 @@ public class PedidoServiceImpl implements PedidoService{
 
     @Override
     public Optional<Pedido> findById(Long id) {
-
-        Optional<Pedido> pedido = pedidoRepository.findById(id);
-        pedido.get().setCliente(buildCliente(pedido));
-        return pedido;
+        return pedidoRepository.findById(id);
     }
 
     @Override

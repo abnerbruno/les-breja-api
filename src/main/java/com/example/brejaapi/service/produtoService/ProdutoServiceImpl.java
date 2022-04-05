@@ -1,6 +1,6 @@
-package com.example.brejaapi.service.cervejaService;
+package com.example.brejaapi.service.produtoService;
 
-import com.example.brejaapi.domain.orm.produto.Cerveja;
+import com.example.brejaapi.domain.orm.produto.Produto;
 import com.example.brejaapi.domain.repository.CervejaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,33 +11,33 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class CervejaServiceImpl implements CervejaService {
+public class ProdutoServiceImpl implements ProdutoService {
 
     @Autowired
     private final CervejaRepository cervejaRepository;
 
     @Override
-    public Collection<Cerveja> findAll() {
+    public Collection<Produto> findAll() {
         //QUALQUER REGRA DE NEGÓCIO OU VALIDAÇÃO ANTES DE SALVAR
-        return (Collection<Cerveja>) cervejaRepository.findAll();
+        return (Collection<Produto>) cervejaRepository.findAll();
     }
 
     @Override
-    public Optional<Cerveja> findById(Long id) {
+    public Optional<Produto> findById(Long id) {
         //QUALQUER REGRA DE NEGÓCIO OU VALIDAÇÃO ANTES DE SALVAR
         return cervejaRepository.findById(id);
     }
 
     @Override
-    public Cerveja save(Cerveja cerveja) {
+    public Produto save(Produto produto) {
         //QUALQUER REGRA DE NEGÓCIO OU VALIDAÇÃO ANTES DE SALVAR
-        return cervejaRepository.save(cerveja);
+        return cervejaRepository.save(produto);
     }
 
     @Override
-    public Cerveja update(Cerveja cerveja) {
+    public Produto update(Produto produto) {
         //QUALQUER REGRA DE NEGÓCIO OU VALIDAÇÃO ANTES DE SALVAR
-        return cervejaRepository.save(cerveja);
+        return cervejaRepository.save(produto);
     }
 
     @Override

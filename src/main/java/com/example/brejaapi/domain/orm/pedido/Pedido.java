@@ -1,9 +1,9 @@
-package com.example.brejaapi.domain.orm;
+package com.example.brejaapi.domain.orm.pedido;
 
 import com.example.brejaapi.domain.orm.cliente.Cartao;
 import com.example.brejaapi.domain.orm.cliente.Cliente;
 import com.example.brejaapi.domain.orm.cliente.Endereco;
-import com.example.brejaapi.domain.orm.produto.Cerveja;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,15 +28,17 @@ public class Pedido {
     private String status;
     private LocalDate dataCadastro = LocalDate.now();
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "pedido_itemsPedido",
+            joinColumns = { @JoinColumn(name = "pedido_id") },
+            inverseJoinColumns = { @JoinColumn(name = "itemPedido_id") })
+    private List<ItemPedido> itemsDoPedido;
+
+
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
+    @JsonIgnoreProperties({"pedidos", "enderecos", "cartoes", "cupoms", "trocas"})
     private Cliente cliente;
-
-    @ManyToMany
-    @JoinTable(name = "pedido_cerveja",
-            joinColumns = { @JoinColumn(name = "pedido_id") },
-            inverseJoinColumns = { @JoinColumn(name = "cerveja_id") })
-    private List<Cerveja> cervejas;
 
     @ManyToOne
     @JoinColumn(name = "endereco_id")

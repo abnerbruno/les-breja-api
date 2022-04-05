@@ -1,5 +1,6 @@
 package com.example.brejaapi.domain.orm;
 
+import com.example.brejaapi.domain.orm.pedido.Pedido;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

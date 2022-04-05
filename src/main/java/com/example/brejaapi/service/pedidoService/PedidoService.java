@@ -1,6 +1,6 @@
 package com.example.brejaapi.service.pedidoService;
 
-import com.example.brejaapi.domain.orm.Pedido;
+import com.example.brejaapi.domain.orm.pedido.Pedido;
 
 import java.util.Collection;
 import java.util.Optional;

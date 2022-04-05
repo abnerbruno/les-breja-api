@@ -1,9 +1,9 @@
 package com.example.brejaapi.domain.orm.cliente;
 
 import com.example.brejaapi.domain.orm.Cupom;
-import com.example.brejaapi.domain.orm.Pedido;
 import com.example.brejaapi.domain.orm.Troca;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.brejaapi.domain.orm.pedido.Pedido;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -51,9 +51,9 @@ public class Cliente {
     @JoinColumn(name = "cartao_id")
     private List<Cartao> cartoes;
 
-    @JsonIgnore
+    @JsonIgnoreProperties("cliente")
     @OneToMany(mappedBy = "cliente")
-    private List<Pedido> pedido;
+    private List<Pedido> pedidos;
 
     @OneToMany
     @JoinColumn(name = "cupom_id")

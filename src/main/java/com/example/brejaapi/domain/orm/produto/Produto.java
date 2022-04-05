@@ -13,8 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Cerveja")
-public class Cerveja {
+@Table(name = "Produto")
+public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +29,8 @@ public class Cerveja {
     private LocalDate dataCadastro = LocalDate.now();
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "cerveja_categorias",
-            joinColumns = { @JoinColumn(name = "cerveja_id") },
+    @JoinTable(name = "produto_categorias",
+            joinColumns = { @JoinColumn(name = "produto_id") },
             inverseJoinColumns = { @JoinColumn(name = "categoria_id") })
     private List<Categoria> categorias;
 }
