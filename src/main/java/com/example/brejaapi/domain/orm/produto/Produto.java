@@ -28,6 +28,9 @@ public class Produto {
     private String descricao;
     private LocalDate dataCadastro = LocalDate.now();
 
+    @Column(length = 64)
+    private String photo;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "produto_categorias",
             joinColumns = { @JoinColumn(name = "produto_id") },
