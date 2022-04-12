@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Data
@@ -18,9 +19,11 @@ public class Cartao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String NomeNoCartao;
     private String numeroCartao;
-    private String tipoConta;
+    private Date Validade;
     private String codigoSeguranca;
+    private String tipoConta;
     private String bandeira;
     
     private String descricao;

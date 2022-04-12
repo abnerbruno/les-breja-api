@@ -23,6 +23,7 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private int totalItens;
     private BigDecimal valorTotal;
     private BigDecimal frete;
     private String status;
