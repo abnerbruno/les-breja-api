@@ -23,7 +23,7 @@ public class BrejaApiApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception
 	{
-		populateProducts();
+		//populateProducts();
 	}
 
 	@Autowired
