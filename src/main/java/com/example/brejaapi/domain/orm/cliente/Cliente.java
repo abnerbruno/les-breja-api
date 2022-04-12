@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -30,6 +31,7 @@ public class Cliente {
     private String dataNascimento;
     private String genero;
     private String status;
+    private LocalDate dataCadastro = LocalDate.now();
 
     public Cliente(Long id, String nomeCompleto, String cpf, String classificacao, String email, String telefone, String dataNascimento, String genero, String status) {
         this.id = id;
