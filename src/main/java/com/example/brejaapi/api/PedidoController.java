@@ -30,6 +30,7 @@ class PedidoController {
 
     @GetMapping("/pedidos")
     Collection<Pedido> pedidos() {
+        log.info("Request to find all Pedidos");
         return pedidoService.findAll();
     }
 
