@@ -30,6 +30,7 @@ class EnvioController {
 
     @GetMapping("/envios")
     Collection<Envio> envios() {
+        log.info("Request to find all Envios");
         return envioService.findAll();
     }
 

@@ -30,6 +30,7 @@ class TrocaController {
 
     @GetMapping("/trocas")
     Collection<Troca> trocas() {
+        log.info("Request to find all Trocas");
         return trocaService.findAll();
     }
 

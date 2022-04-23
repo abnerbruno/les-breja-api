@@ -30,6 +30,7 @@ class CupomController {
 
     @GetMapping("/cupoms")
     Collection<Cupom> cupoms() {
+        log.info("Request to find all Cupons");
         return cupomService.findAll();
     }
 

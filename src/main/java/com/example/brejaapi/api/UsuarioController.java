@@ -30,6 +30,7 @@ class UsuarioController {
 
     @GetMapping("/usuarios")
     Collection<Usuario> usuarios() {
+        log.info("Request to find all Usuarios");
         return usuarioService.findAll();
     }
 

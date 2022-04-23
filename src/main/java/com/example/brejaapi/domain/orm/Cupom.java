@@ -21,6 +21,7 @@ public class Cupom {
     private String codigoCupom;
     private BigDecimal valor;
     private String tipoCupom; //Troca ou Desconto
+    private String status;
     private LocalDate dataValidade;
     private LocalDate dataCriacao = LocalDate.now();
 }

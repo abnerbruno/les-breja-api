@@ -19,9 +19,9 @@ public class Cartao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String NomeNoCartao;
+    private String nomeNoCartao;
     private String numeroCartao;
-    private Date Validade;
+    private Date validade;
     private String codigoSeguranca;
     private String tipoConta;
     private String bandeira;
