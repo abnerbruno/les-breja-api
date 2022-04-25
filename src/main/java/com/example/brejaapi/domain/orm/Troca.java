@@ -23,12 +23,16 @@ public class Troca {
     private Long id;
     private String status;
     private String descricaoTroca;
-    private BigDecimal valorDesconto;
     private LocalDate dataSolicitacao = LocalDate.now();
 
     @OneToOne
-    @JoinColumn(name = "pedido_id")
-    @JsonIgnoreProperties({"itemsDoPedido", "enderecoEnvio", "cartaoUtilizado"})
+    @JoinColumn(name = "pedido_id", nullable = false)
+    @JsonIgnoreProperties({"itemsDoPedido", "pagamentos", "envio", "cliente"})
     private Pedido pedido;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
+    @JsonIgnoreProperties({"pedidos", "enderecos", "cartoes", "cupoms", "trocas"})
+    private Cliente cliente;
 
 }

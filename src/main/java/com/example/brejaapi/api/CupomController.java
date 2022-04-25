@@ -50,7 +50,7 @@ class CupomController {
                 .body(result);
     }
 
-    @PutMapping("/cupom")
+    @PutMapping("/cupom/{id}")
     ResponseEntity<Cupom> updateCupom(@Validated @RequestBody Cupom cupom) {
         log.info("Request to update Cupom: {}", cupom);
         Cupom result = cupomService.update(cupom);

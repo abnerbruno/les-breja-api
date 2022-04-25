@@ -1,6 +1,6 @@
 package com.example.brejaapi.service.envioService;
 
-import com.example.brejaapi.domain.orm.Envio;
+import com.example.brejaapi.domain.orm.pedido.envio.Envio;
 import com.example.brejaapi.domain.repository.EnvioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

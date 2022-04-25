@@ -50,7 +50,7 @@ class TrocaController {
                 .body(result);
     }
 
-    @PutMapping("/troca")
+    @PutMapping("/troca/{id}")
     ResponseEntity<Troca> updateTroca(@Validated @RequestBody Troca troca) {
         log.info("Request to update Troca: {}", troca);
         Troca result = trocaService.update(troca);

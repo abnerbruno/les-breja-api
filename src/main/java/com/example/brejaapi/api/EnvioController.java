@@ -1,7 +1,7 @@
 package com.example.brejaapi.api;
 
 
-import com.example.brejaapi.domain.orm.Envio;
+import com.example.brejaapi.domain.orm.pedido.envio.Envio;
 import com.example.brejaapi.service.envioService.EnvioService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;

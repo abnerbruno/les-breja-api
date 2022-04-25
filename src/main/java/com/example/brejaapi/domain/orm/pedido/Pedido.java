@@ -1,9 +1,9 @@
 package com.example.brejaapi.domain.orm.pedido;
 
-import com.example.brejaapi.domain.orm.cliente.Cartao;
 import com.example.brejaapi.domain.orm.cliente.Cliente;
-import com.example.brejaapi.domain.orm.cliente.Endereco;
-import com.fasterxml.jackson.annotation.*;
+import com.example.brejaapi.domain.orm.pedido.envio.Envio;
+import com.example.brejaapi.domain.orm.pedido.pagamento.Pagamento;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +25,6 @@ public class Pedido {
     private Long id;
     private int totalItens;
     private BigDecimal valorTotal;
-    private BigDecimal frete;
     private String status;
     private LocalDate dataCadastro = LocalDate.now();
 
@@ -41,13 +40,15 @@ public class Pedido {
     @JsonIgnoreProperties({"pedidos", "enderecos", "cartoes", "cupoms", "trocas"})
     private Cliente cliente;
 
-    @ManyToOne
-    @JoinColumn(name = "endereco_id")
-    private Endereco enderecoEnvio;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "pedido_pagamento",
+            joinColumns = { @JoinColumn(name = "pedido_id") },
+            inverseJoinColumns = { @JoinColumn(name = "pagamento_id") })
+    private List<Pagamento> pagamentos;
 
-    @ManyToOne
-    @JoinColumn(name = "cartao_id")
-    private Cartao cartaoUtilizado;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "envio_id")
+    private Envio envio;
 
 
 }

@@ -1,6 +1,6 @@
 package com.example.brejaapi.domain.repository;
 
-import com.example.brejaapi.domain.orm.Envio;
+import com.example.brejaapi.domain.orm.pedido.envio.Envio;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
