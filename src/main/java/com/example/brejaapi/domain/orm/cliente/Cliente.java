@@ -57,8 +57,8 @@ public class Cliente {
     @JsonIgnoreProperties("cliente")
     private List<Pedido> pedidos;
 
-    @OneToMany
-    @JoinColumn(name = "cupom_id")
+    @OneToMany(mappedBy = "cliente")
+    @JsonIgnoreProperties("cliente")
     private List<Cupom> cupoms;
 
     @OneToMany(mappedBy = "cliente")

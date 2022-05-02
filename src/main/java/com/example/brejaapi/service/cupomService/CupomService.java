@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface CupomService {
     Collection<Cupom> findAll();
     Optional<Cupom> findById(Long id);
+    Optional<Cupom> findByCod(String code);
     Cupom save(Cupom cupom);
     Cupom update(Cupom object);
     void deleteById(Long id);

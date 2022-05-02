@@ -1,5 +1,7 @@
 package com.example.brejaapi.domain.orm;
 
+import com.example.brejaapi.domain.orm.cliente.Cliente;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,4 +26,9 @@ public class Cupom {
     private String status;
     private LocalDate dataValidade;
     private LocalDate dataCriacao = LocalDate.now();
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    @JsonIgnoreProperties({"pedidos", "enderecos", "cartoes", "cupoms", "trocas"})
+    private Cliente cliente;
 }

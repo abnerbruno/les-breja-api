@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -20,7 +21,9 @@ public class Pagamento {
 
     private BigDecimal valorTotal;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pagamento_id")
-    private FormaPagamento formaPagamento;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "pagamento_formaPagamento",
+            joinColumns = { @JoinColumn(name = "pagamento_id") },
+            inverseJoinColumns = { @JoinColumn(name = "formaPagamento_id") })
+    private List<FormaPagamento> formasPagamento;
 }

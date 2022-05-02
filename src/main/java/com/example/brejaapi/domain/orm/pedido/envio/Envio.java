@@ -19,6 +19,8 @@ public class Envio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String remetente;
+
     private String longadouro;
     private String tipoLongadouro;
     private String tipoResidencia;

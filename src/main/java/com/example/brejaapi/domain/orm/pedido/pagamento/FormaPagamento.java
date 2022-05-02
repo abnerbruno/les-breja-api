@@ -27,6 +27,4 @@ public class FormaPagamento {
     private String codigoSeguranca;
     private String tipoConta;
     private String bandeira;
-
-    private String descricao;
 }

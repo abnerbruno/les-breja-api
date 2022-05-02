@@ -23,6 +23,10 @@ public class CupomServiceImpl implements CupomService {
     public Optional<Cupom> findById(Long id) {
         return cupomRepository.findById(id);
     }
+    @Override
+    public Optional<Cupom> findByCod(String codigoCupom) {
+        return cupomRepository.findCupomByCod(codigoCupom);
+    }
 
     @Override
     public Cupom save(Cupom cupom) {

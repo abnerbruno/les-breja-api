@@ -40,11 +40,8 @@ public class Pedido {
     @JsonIgnoreProperties({"pedidos", "enderecos", "cartoes", "cupoms", "trocas"})
     private Cliente cliente;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "pedido_pagamento",
-            joinColumns = { @JoinColumn(name = "pedido_id") },
-            inverseJoinColumns = { @JoinColumn(name = "pagamento_id") })
-    private List<Pagamento> pagamentos;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Pagamento pagamento;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "envio_id")

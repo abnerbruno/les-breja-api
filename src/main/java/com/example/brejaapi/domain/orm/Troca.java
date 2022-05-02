@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -26,12 +25,17 @@ public class Troca {
     private LocalDate dataSolicitacao = LocalDate.now();
 
     @OneToOne
-    @JoinColumn(name = "pedido_id", nullable = false)
-    @JsonIgnoreProperties({"itemsDoPedido", "pagamentos", "envio", "cliente"})
+    @JoinColumn(name = "cupom_id")
+    @JsonIgnoreProperties("cliente")
+    private Cupom cupom;
+
+    @OneToOne
+    @JoinColumn(name = "pedido_id")
+    @JsonIgnoreProperties({"itemsDoPedido", "pagamento", "envio", "cliente"})
     private Pedido pedido;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @JoinColumn(name = "cliente_id")
     @JsonIgnoreProperties({"pedidos", "enderecos", "cartoes", "cupoms", "trocas"})
     private Cliente cliente;
 

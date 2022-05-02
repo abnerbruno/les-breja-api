@@ -42,6 +42,14 @@ class CupomController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/cupom/cod/{codigoCupom}")
+    ResponseEntity<Cupom> getCupomByCod(@Validated @PathVariable String codigoCupom) {
+        log.info("Request to find Cupom by codigoCupom: {}", codigoCupom);
+        Optional<Cupom> cupom = cupomService.findByCod(codigoCupom);
+        return cupom.map(response -> ResponseEntity.ok().body(response))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
     @PostMapping("/cupom")
     ResponseEntity<Cupom> createCupom(@RequestBody Cupom cupom) throws URISyntaxException {
         log.info("Request to create Cupom: {}", cupom);
