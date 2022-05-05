@@ -26,7 +26,7 @@ public class Troca {
 
     @OneToOne
     @JoinColumn(name = "cupom_id")
-    @JsonIgnoreProperties("cliente")
+    @JsonIgnoreProperties({"cliente"})
     private Cupom cupom;
 
     @OneToOne
