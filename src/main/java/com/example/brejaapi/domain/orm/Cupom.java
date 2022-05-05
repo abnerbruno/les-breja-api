@@ -28,7 +28,7 @@ public class Cupom {
     private LocalDate dataCriacao = LocalDate.now();
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
+    @JoinColumn(name = "cliente_id", foreignKey = @ForeignKey(name="CUPOM_TO_CLIENTE_FK"))
     @JsonIgnoreProperties({"pedidos", "enderecos", "cartoes", "cupoms", "trocas"})
     private Cliente cliente;
 }

@@ -25,17 +25,17 @@ public class Troca {
     private LocalDate dataSolicitacao = LocalDate.now();
 
     @OneToOne
-    @JoinColumn(name = "cupom_id")
+    @JoinColumn(name = "cupom_id", foreignKey = @ForeignKey(name="TROCA_TO_CUPOM_FK"))
     @JsonIgnoreProperties({"cliente"})
     private Cupom cupom;
 
     @OneToOne
-    @JoinColumn(name = "pedido_id")
+    @JoinColumn(name = "pedido_id", foreignKey = @ForeignKey(name="TROCA_TO_PEDIDO_FK"))
     @JsonIgnoreProperties({"itemsDoPedido", "pagamento", "envio", "cliente"})
     private Pedido pedido;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
+    @JoinColumn(name = "cliente_id", foreignKey = @ForeignKey(name="TROCA_TO_CLIENTE_FK"))
     @JsonIgnoreProperties({"pedidos", "enderecos", "cartoes", "cupoms", "trocas"})
     private Cliente cliente;
 

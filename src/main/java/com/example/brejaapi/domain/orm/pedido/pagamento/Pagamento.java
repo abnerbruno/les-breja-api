@@ -23,7 +23,7 @@ public class Pagamento {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "pagamento_formaPagamento",
-            joinColumns = { @JoinColumn(name = "pagamento_id") },
-            inverseJoinColumns = { @JoinColumn(name = "formaPagamento_id") })
+            joinColumns = {@JoinColumn(name = "pagamento_id", foreignKey = @ForeignKey(name = "PAGAMENTO_FK"))},
+            inverseJoinColumns = {@JoinColumn(name = "formaPagamento_id", foreignKey = @ForeignKey(name = "FORMA_PAGAMENTO_FK"))})
     private List<FormaPagamento> formasPagamento;
 }

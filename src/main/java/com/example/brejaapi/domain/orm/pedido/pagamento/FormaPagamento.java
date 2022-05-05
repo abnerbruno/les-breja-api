@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Pagamento")
+@Table(name = "FormaPagamento")
 public class FormaPagamento {
 
     @Id

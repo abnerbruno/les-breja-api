@@ -33,7 +33,7 @@ public class Produto {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "produto_categorias",
-            joinColumns = { @JoinColumn(name = "produto_id") },
-            inverseJoinColumns = { @JoinColumn(name = "categoria_id") })
+            joinColumns = { @JoinColumn(name = "produto_id", foreignKey = @ForeignKey(name="PRODUTO_FK")) },
+            inverseJoinColumns = { @JoinColumn(name = "categoria_id", foreignKey = @ForeignKey(name="CATEGORIA_FK")) })
     private List<Categoria> categorias;
 }

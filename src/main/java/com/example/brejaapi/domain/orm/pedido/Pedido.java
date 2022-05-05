@@ -30,21 +30,22 @@ public class Pedido {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "pedido_itemsPedido",
-            joinColumns = { @JoinColumn(name = "pedido_id") },
-            inverseJoinColumns = { @JoinColumn(name = "itemPedido_id") })
+            joinColumns = {@JoinColumn(name = "pedido_id", foreignKey = @ForeignKey(name = "PEDIDO_FK"))},
+            inverseJoinColumns = {@JoinColumn(name = "itemPedido_id", foreignKey = @ForeignKey(name = "ITEM_PEDIDO_FK"))})
     private List<ItemPedido> itemsDoPedido;
 
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @JoinColumn(name = "cliente_id", foreignKey = @ForeignKey(name = "PEDIDO_TO_CLIENTE_FK"))
     @JsonIgnoreProperties({"pedidos", "enderecos", "cartoes", "cupoms", "trocas"})
     private Cliente cliente;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pagamento_id", foreignKey = @ForeignKey(name = "PEDIDO_TO_PAGAMENTO_FK"))
     private Pagamento pagamento;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "envio_id")
+    @JoinColumn(name = "envio_id", foreignKey = @ForeignKey(name = "PEDIDO_TO_ENVIO_FK"))
     private Envio envio;
 
 

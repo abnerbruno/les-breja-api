@@ -20,7 +20,7 @@ public class ItemPedido {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id")
+    @JoinColumn(name = "produto_id", foreignKey = @ForeignKey(name="ITEMPEDIDO_TO_PEDIDO_FK"))
     private Produto produto;
 
     private int quantidade;

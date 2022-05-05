@@ -46,11 +46,11 @@ public class Cliente {
     }
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "endereco_id")
+    @JoinColumn(name = "cliente_id", foreignKey = @ForeignKey(name="CLIENTE_TO_ENDERECO_FK"))
     private List<Endereco> enderecos;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cartao_id")
+    @JoinColumn(name = "cliente_id", foreignKey = @ForeignKey(name="CLIENTE_TO_CARTAO_FK"))
     private List<Cartao> cartoes;
 
     @OneToMany(mappedBy = "cliente")
