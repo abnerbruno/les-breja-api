@@ -2,6 +2,8 @@ package com.example.brejaapi;
 
 import com.example.brejaapi.domain.orm.produto.Categoria;
 import com.example.brejaapi.domain.orm.produto.Produto;
+import com.example.brejaapi.domain.orm.produto.estoque.EntradaEstoque;
+import com.example.brejaapi.domain.orm.produto.estoque.EstoqueProduto;
 import com.example.brejaapi.domain.repository.CervejaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,7 +25,9 @@ public class BrejaApiApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception
 	{
-		//populateProducts();
+		if (!cr.findById(1L).isPresent()){
+			populateProducts();
+		}
 	}
 
 	@Autowired
@@ -31,10 +35,27 @@ public class BrejaApiApplication implements CommandLineRunner {
 
 	@Transactional
 	public void populateProducts(){
-		List<Produto> lp = new ArrayList<>();
+
+		/* Lista Categoria Produto*/
+		Categoria ct = new Categoria();
+		ct.setNome("Artesanal");
+		ct.setDescricao("Feita a Mão");
+
+		List<Categoria> categoriaList = new ArrayList<>();
+		categoriaList.add(ct);
+		/* Lista Categoria Produto*/
+
+		/*Estoque Produto*/
+		EstoqueProduto ep = new EstoqueProduto();
+		ep.setQuantidadeAtual(10);
+		ep.setValorBruto(new BigDecimal("60000.0"));
+		/*Estoque Produto*/
+
+
+
+		List<Produto> produtoList = new ArrayList<>();
 
 		Produto produto1 = new Produto();
-		produto1.setQuantidade(10);
 		produto1.setValorDeVenda(new BigDecimal("60.0"));
 		produto1.setMargemDeLucro(new BigDecimal(8));
 		produto1.setNome("Buffalo - Striploin 500ml");
@@ -44,19 +65,13 @@ public class BrejaApiApplication implements CommandLineRunner {
 				"cuidadoso, com foco em qualidade");
 		produto1.setPhoto("/img/11.jpg");
 
-		Categoria ct = new Categoria();
-		ct.setNome("Artesanal");
-		ct.setDescricao("Feita a Mão");
+		produto1.setEstoqueProduto(ep);
+		produto1.setCategorias(categoriaList);
+		produtoList.add(produto1);
 
-
-		List<Categoria> lc = new ArrayList<>();
-		lc.add(ct);
-		produto1.setCategorias(lc);
-
-		lp.add(produto1);
+		/*===================================*/
 
 		Produto produto2 = new Produto();
-		produto2.setQuantidade(10);
 		produto2.setValorDeVenda(new BigDecimal("70.92"));
 		produto2.setMargemDeLucro(new BigDecimal(10));
 		produto2.setNome("Bacardi Breezer - Tropical 500ml");
@@ -66,12 +81,14 @@ public class BrejaApiApplication implements CommandLineRunner {
 				"cuidadoso, com foco em qualidade");
 		produto2.setPhoto("/img/12.jpg");
 
-		produto2.setCategorias(lc);
+		produto2.setEstoqueProduto(ep);
+		produto2.setCategorias(categoriaList);
+		produtoList.add(produto2);
 
-		lp.add(produto2);
+		/*===================================*/
 
 		Produto produto3 = new Produto();
-		produto3.setQuantidade(10);
+
 		produto3.setValorDeVenda(new BigDecimal("51.01"));
 		produto3.setMargemDeLucro(new BigDecimal(12));
 		produto3.setNome("Wine - Gato Negro Cabernet 500ml");
@@ -81,12 +98,14 @@ public class BrejaApiApplication implements CommandLineRunner {
 				"cuidadoso, com foco em qualidade");
 		produto3.setPhoto("/img/13.jpg");
 
-		produto3.setCategorias(lc);
+		produto3.setEstoqueProduto(ep);
+		produto3.setCategorias(categoriaList);
+		produtoList.add(produto3);
 
-		lp.add(produto3);
+		/*===================================*/
 
 		Produto produto4 = new Produto();
-		produto4.setQuantidade(10);
+
 		produto4.setValorDeVenda(new BigDecimal("40.9"));
 		produto4.setMargemDeLucro(new BigDecimal(14));
 		produto4.setNome("Cabbage - Nappa 500ml");
@@ -96,12 +115,13 @@ public class BrejaApiApplication implements CommandLineRunner {
 				"cuidadoso, com foco em qualidade");
 		produto4.setPhoto("/img/14.jpg");
 
-		produto4.setCategorias(lc);
+		produto4.setEstoqueProduto(ep);
+		produto4.setCategorias(categoriaList);
+		produtoList.add(produto4);
 
-		lp.add(produto4);
+		/*===================================*/
 
 		Produto produto5 = new Produto();
-		produto5.setQuantidade(10);
 		produto5.setValorDeVenda(new BigDecimal("30.85"));
 		produto5.setMargemDeLucro(new BigDecimal(16));
 		produto5.setNome("Sping Loaded Cup Dispenser 500ml");
@@ -111,12 +131,13 @@ public class BrejaApiApplication implements CommandLineRunner {
 				"cuidadoso, com foco em qualidade");
 		produto5.setPhoto("/img/15.jpg");
 
-		produto5.setCategorias(lc);
+		produto5.setEstoqueProduto(ep);
+		produto5.setCategorias(categoriaList);
+		produtoList.add(produto5);
 
-		lp.add(produto5);
+		/*===================================*/
 
 		Produto produto6 = new Produto();
-		produto6.setQuantidade(10);
 		produto6.setValorDeVenda(new BigDecimal("82.61"));
 		produto6.setMargemDeLucro(new BigDecimal(18));
 		produto6.setNome("Bread - Malt 500ml");
@@ -126,12 +147,13 @@ public class BrejaApiApplication implements CommandLineRunner {
 				"cuidadoso, com foco em qualidade");
 		produto6.setPhoto("/img/16.jpg");
 
-		produto6.setCategorias(lc);
+		produto6.setEstoqueProduto(ep);
+		produto6.setCategorias(categoriaList);
+		produtoList.add(produto6);
 
-		lp.add(produto6);
+		/*===================================*/
 
 		Produto produto7 = new Produto();
-		produto7.setQuantidade(10);
 		produto7.setValorDeVenda(new BigDecimal("60.1"));
 		produto7.setMargemDeLucro(new BigDecimal(20));
 		produto7.setNome("Glass Clear 8 Oz 500ml");
@@ -141,12 +163,13 @@ public class BrejaApiApplication implements CommandLineRunner {
 				"cuidadoso, com foco em qualidade");
 		produto7.setPhoto("/img/17.jpg");
 
-		produto7.setCategorias(lc);
+		produto7.setEstoqueProduto(ep);
+		produto7.setCategorias(categoriaList);
+		produtoList.add(produto7);
 
-		lp.add(produto7);
+		/*===================================*/
 
 		Produto produto8 = new Produto();
-		produto8.setQuantidade(10);
 		produto8.setValorDeVenda(new BigDecimal("80.99"));
 		produto8.setMargemDeLucro(new BigDecimal(22));
 		produto8.setNome("Sour Puss Raspberry 500ml");
@@ -156,12 +179,13 @@ public class BrejaApiApplication implements CommandLineRunner {
 				"cuidadoso, com foco em qualidade");
 		produto8.setPhoto("/img/18.jpg");
 
-		produto8.setCategorias(lc);
+		produto8.setEstoqueProduto(ep);
+		produto8.setCategorias(categoriaList);
+		produtoList.add(produto8);
 
-		lp.add(produto8);
+		/*===================================*/
 
 		Produto produto9 = new Produto();
-		produto9.setQuantidade(10);
 		produto9.setValorDeVenda(new BigDecimal("50.16"));
 		produto9.setMargemDeLucro(new BigDecimal(24));
 		produto9.setNome("Pork - Chop, Frenched 500ml");
@@ -171,12 +195,14 @@ public class BrejaApiApplication implements CommandLineRunner {
 				"cuidadoso, com foco em qualidade");
 		produto9.setPhoto("/img/19.jpg");
 
-		produto9.setCategorias(lc);
+		produto9.setEstoqueProduto(ep);
+		produto9.setCategorias(categoriaList);
+		produtoList.add(produto9);
 
-		lp.add(produto9);
+		/*===================================*/
 
 		Produto produto10 = new Produto();
-		produto10.setQuantidade(10);
+
 		produto10.setValorDeVenda(new BigDecimal("110.82"));
 		produto10.setMargemDeLucro(new BigDecimal(26));
 		produto10.setNome("Bagels Poppyseed 500ml");
@@ -186,12 +212,15 @@ public class BrejaApiApplication implements CommandLineRunner {
 				"cuidadoso, com foco em qualidade");
 		produto10.setPhoto("/img/20.jpg");
 
-		produto10.setCategorias(lc);
+		produto10.setEstoqueProduto(ep);
+		produto10.setCategorias(categoriaList);
+		produtoList.add(produto10);
 
-		lp.add(produto10);
+		/*===================================*/
 
-		for(Produto pr : lp){
+		for(Produto pr : produtoList){
 			pr.getCategorias().get(0).setId(null);
+			pr.getEstoqueProduto().setId(null);
 			cr.save(pr);
 		}
 

@@ -1,6 +1,7 @@
 package com.example.brejaapi.domain.orm.pedido;
 
 import com.example.brejaapi.domain.orm.produto.Produto;
+import com.example.brejaapi.domain.orm.produto.estoque.SaidaEstoque;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,4 +25,9 @@ public class ItemPedido {
     private Produto produto;
 
     private int quantidade;
+    private String status;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "saidaEstoque_id", foreignKey = @ForeignKey(name="ITEMPEDIDO_TO_SAIDA_ESTOQUE_FK"))
+    private SaidaEstoque saidasEstoque;
 }

@@ -1,5 +1,8 @@
 package com.example.brejaapi.domain.orm.produto;
 
+import com.example.brejaapi.domain.orm.produto.estoque.EntradaEstoque;
+import com.example.brejaapi.domain.orm.produto.estoque.EstoqueProduto;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +22,6 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int quantidade;
     private BigDecimal valorDeVenda;
     private BigDecimal margemDeLucro;
     private String nome;
@@ -36,4 +38,15 @@ public class Produto {
             joinColumns = { @JoinColumn(name = "produto_id", foreignKey = @ForeignKey(name="PRODUTO_FK")) },
             inverseJoinColumns = { @JoinColumn(name = "categoria_id", foreignKey = @ForeignKey(name="CATEGORIA_FK")) })
     private List<Categoria> categorias;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "produto_id", foreignKey = @ForeignKey(name="PRODUTO_TO_ENTRADA_ESTOQUE_FK"))
+    @JsonIgnoreProperties({"estoqueProduto"})
+    private List<EntradaEstoque> entradasEstoque;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "estoque_id", foreignKey = @ForeignKey(name = "PRODUTO_TO_ESTOQUE_PRODUTO_FK"))
+    private EstoqueProduto estoqueProduto;
+
+
 }
