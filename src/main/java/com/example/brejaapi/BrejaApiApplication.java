@@ -1,10 +1,14 @@
 package com.example.brejaapi;
 
+import com.example.brejaapi.domain.orm.cliente.Cartao;
+import com.example.brejaapi.domain.orm.cliente.Cliente;
+import com.example.brejaapi.domain.orm.cliente.Endereco;
 import com.example.brejaapi.domain.orm.produto.Categoria;
 import com.example.brejaapi.domain.orm.produto.Produto;
 import com.example.brejaapi.domain.orm.produto.estoque.EntradaEstoque;
 import com.example.brejaapi.domain.orm.produto.estoque.EstoqueProduto;
 import com.example.brejaapi.domain.repository.CervejaRepository;
+import com.example.brejaapi.domain.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @SpringBootApplication
@@ -25,13 +30,20 @@ public class BrejaApiApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception
 	{
-		if (!cr.findById(1L).isPresent()){
+		if (!clienteRepository.findById(1L).isPresent()){
+			populateCliente();
+		}
+
+		if (!cervejaRepository.findById(1L).isPresent()){
 			populateProducts();
 		}
 	}
 
 	@Autowired
-	CervejaRepository cr;
+	CervejaRepository cervejaRepository;
+
+	@Autowired
+	ClienteRepository clienteRepository;
 
 	@Transactional
 	public void populateProducts(){
@@ -221,9 +233,82 @@ public class BrejaApiApplication implements CommandLineRunner {
 		for(Produto pr : produtoList){
 			pr.getCategorias().get(0).setId(null);
 			pr.getEstoqueProduto().setId(null);
-			cr.save(pr);
+			cervejaRepository.save(pr);
 		}
 
+	}
+
+	@Transactional
+	public void populateCliente(){
+
+		Cliente cliente = new Cliente();
+		cliente.setNomeCompleto("Bruno Abner Silva Santos");
+		cliente.setCpf("32198740321");
+		cliente.setClassificacao("Rank B");
+		cliente.setEmail("brunoabner321@gmail.com");
+		cliente.setSenha("12345");
+		cliente.setTelefone("97123-0887");
+		cliente.setDataNascimento("02-08-1999");
+		cliente.setGenero("Masculino");
+		cliente.setStatus("Ativo");
+
+		List<Endereco> enderecoList = new ArrayList<>();
+
+		Endereco end1 = new Endereco();
+		end1.setLongadouro("Rua Salvador Rugiero");
+		end1.setTipoLongadouro("Residencia");
+		end1.setTipoResidencia("Residencia");
+		end1.setNumero("19");
+		end1.setBairro("Vila Maluf");
+		end1.setCidade("Suzano");
+		end1.setEstado("Sao Paulo");
+		end1.setCep("08685-060");
+		end1.setPais("Brasil");
+		end1.setDescricao("Casa");
+
+		Endereco end2 = new Endereco();
+		end2.setLongadouro("Rua MarioCovas");
+		end2.setTipoLongadouro("Residencia");
+		end2.setTipoResidencia("Residencia");
+		end2.setNumero("26");
+		end2.setBairro("Vila Orlanda");
+		end2.setCidade("Mogi das Cruzes");
+		end2.setEstado("Sao Paulo");
+		end2.setCep("12345-080");
+		end2.setPais("Brasil");
+		end2.setDescricao("Empresa");
+
+		enderecoList.add(end1);
+		enderecoList.add(end2);
+
+		cliente.setEnderecos(enderecoList);
+
+		List<Cartao> cartaoList = new ArrayList<>();
+
+		Cartao car1 = new Cartao();
+		car1.setNomeNoCartao("Bruno Abner da Silva Santos");
+		car1.setNumeroCartao("1234567");
+		car1.setTipoConta("Poupanca");
+		car1.setCodigoSeguranca("123");
+		car1.setBandeira("Visa");
+		car1.setValidade(new Date());
+		car1.setDescricao("Cartão Nubank");
+
+		Cartao car2 = new Cartao();
+		car2.setNomeNoCartao("Melissa Oliveira Santos");
+		car2.setNumeroCartao("7654321");
+		car2.setTipoConta("Poupanca");
+		car2.setCodigoSeguranca("321");
+		car2.setBandeira("Master Card");
+		car2.setValidade(new Date());
+		car2.setDescricao("Cartão Neon");
+
+		cartaoList.add(car1);
+		cartaoList.add(car2);
+
+		cliente.setCartoes(cartaoList);
+
+		clienteRepository.save(cliente);
 	}
 
 }
