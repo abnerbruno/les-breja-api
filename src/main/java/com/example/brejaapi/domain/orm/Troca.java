@@ -31,7 +31,7 @@ public class Troca {
 
     @OneToOne
     @JoinColumn(name = "pedido_id", foreignKey = @ForeignKey(name="TROCA_TO_PEDIDO_FK"))
-    @JsonIgnoreProperties(value = {"itemsDoPedido", "pagamento", "envio", "cliente"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"pagamento", "envio", "cliente"}, allowSetters = true)
     private Pedido pedido;
 
     @ManyToOne

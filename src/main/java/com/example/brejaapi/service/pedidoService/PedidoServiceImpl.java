@@ -4,6 +4,7 @@ import com.example.brejaapi.domain.orm.pedido.ItemPedido;
 import com.example.brejaapi.domain.orm.pedido.Pedido;
 import com.example.brejaapi.domain.orm.cliente.Cliente;
 import com.example.brejaapi.domain.orm.produto.Produto;
+import com.example.brejaapi.domain.orm.produto.estoque.EntradaEstoque;
 import com.example.brejaapi.domain.orm.produto.estoque.SaidaEstoque;
 import com.example.brejaapi.domain.repository.CervejaRepository;
 import com.example.brejaapi.domain.repository.PedidoRepository;
@@ -54,6 +55,24 @@ public class PedidoServiceImpl implements PedidoService{
                         saidaEstoque.setEstoqueProduto(produto.getEstoqueProduto());
                         item.setSaidasEstoque(saidaEstoque);
                         item.setStatus("Aprovado");
+
+                        cervejaRepository.save(produto);
+                    }
+                }
+                break;
+
+            case "Pedido Cancelado":
+                for(ItemPedido item : pedido.getItemsDoPedido()){
+                    if(item.getStatus().equals("Aprovado")) {
+                        Produto produto = item.getProduto();
+
+                        int quantidade = produto.getEstoqueProduto().getQuantidadeAtual();
+                        produto.getEstoqueProduto().setQuantidadeAtual(quantidade + item.getSaidasEstoque().getQuantidade());
+
+                        EntradaEstoque entradaEstoque = new EntradaEstoque();
+                        entradaEstoque.setQuantidade(item.getSaidasEstoque().getQuantidade());
+                        produto.getEntradasEstoque().add(entradaEstoque);
+                        item.setStatus("Cancelado");
 
                         cervejaRepository.save(produto);
                     }

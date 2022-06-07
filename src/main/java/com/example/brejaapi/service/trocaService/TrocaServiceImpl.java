@@ -2,6 +2,11 @@ package com.example.brejaapi.service.trocaService;
 
 import com.example.brejaapi.domain.orm.Cupom;
 import com.example.brejaapi.domain.orm.Troca;
+import com.example.brejaapi.domain.orm.pedido.ItemPedido;
+import com.example.brejaapi.domain.orm.pedido.Pedido;
+import com.example.brejaapi.domain.orm.produto.Produto;
+import com.example.brejaapi.domain.orm.produto.estoque.EntradaEstoque;
+import com.example.brejaapi.domain.repository.CervejaRepository;
 import com.example.brejaapi.domain.repository.CupomRepository;
 import com.example.brejaapi.domain.repository.TrocaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +22,9 @@ public class TrocaServiceImpl implements TrocaService {
 
     @Autowired
     private TrocaRepository trocaRepository;
+
+    @Autowired
+    private CervejaRepository cervejaRepository;
 
     @Autowired
     private CupomRepository cupomRepository;
@@ -54,6 +62,23 @@ public class TrocaServiceImpl implements TrocaService {
             cupom.setId(cupomID);
 
             troca.setCupom(cupom);
+
+            Pedido pedido = troca.getPedido();
+            for(ItemPedido item : pedido.getItemsDoPedido()){
+                if(pedido.getStatus().equals("Pagamento Aprovado") && item.getStatus().equals("Aprovado")) {
+                    Produto produto = item.getProduto();
+
+                    int quantidade = produto.getEstoqueProduto().getQuantidadeAtual();
+                    produto.getEstoqueProduto().setQuantidadeAtual(quantidade + item.getSaidasEstoque().getQuantidade());
+
+                    EntradaEstoque entradaEstoque = new EntradaEstoque();
+                    entradaEstoque.setQuantidade(item.getSaidasEstoque().getQuantidade());
+                    produto.getEntradasEstoque().add(entradaEstoque);
+                    item.setStatus("Trocado");
+
+                    cervejaRepository.save(produto);
+                }
+            }
         }
         return trocaRepository.save(troca);
     }
