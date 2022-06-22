@@ -243,11 +243,11 @@ public class BrejaApiApplication implements CommandLineRunner {
 
 		Cliente cliente = new Cliente();
 		cliente.setNomeCompleto("Bruno Abner Silva Santos");
-		cliente.setCpf("32198740321");
+		cliente.setCpf("477.987.408-48");
 		cliente.setClassificacao("Rank B");
-		cliente.setEmail("brunoabner321@gmail.com");
+		cliente.setEmail("brunoabner@gmail.com");
 		cliente.setSenha("12345");
-		cliente.setTelefone("97123-0887");
+		cliente.setTelefone("11 97123-0887");
 		cliente.setDataNascimento("02-08-1999");
 		cliente.setGenero("Masculino");
 		cliente.setStatus("Ativo");
