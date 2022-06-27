@@ -53,7 +53,7 @@ public class Cliente {
     @JoinColumn(name = "cliente_id", foreignKey = @ForeignKey(name="CARTAO_TO_CLIENTE_FK"))
     private List<Cartao> cartoes;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cliente")
     @JsonIgnoreProperties("cliente")
     private List<Pedido> pedidos;
 
